@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Savepoint;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +13,7 @@ import java.util.List;
 public class UserDaoJDBCImpl implements UserDao {
 
     private Connection con;
+
     public UserDaoJDBCImpl() {
         con = Util.getConnection();
     }
@@ -44,7 +44,6 @@ public class UserDaoJDBCImpl implements UserDao {
 
         try(PreparedStatement preparedStatement = con.prepareStatement(sql)) {
             con.setAutoCommit(false);
-            Savepoint savepoint1 = con.setSavepoint();
 
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, lastName);
